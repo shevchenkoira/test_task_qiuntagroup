@@ -103,11 +103,11 @@ docker-compose up
 
 ## Result
 Here you can see statistics about all tasks in my workspace
-![img_1.png](img_1.png)
+![img_1.png](static/img_1.png)
 
 And now I sort by status to see statistics about all active tasks which still don`t mark as done
-![img_2.png](img_2.png)
+![img_2.png](static/img_2.png)
 
 Here you can see all possible fields and values for filtering data
 
-![img_3.png](img_3.png) ![img_4.png](img_4.png)
+![img_3.png](static/img_3.png) ![img_4.png](static/img_4.png)
