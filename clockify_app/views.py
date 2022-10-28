@@ -1,6 +1,5 @@
 import datetime
 
-from django.shortcuts import render
 from clockify_app.models import Project, Task, User
 import requests
 

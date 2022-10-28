@@ -70,6 +70,8 @@ python manage.py runserver
 ```
 - Then open http://127.0.0.1:8000/admin
 - Enter your username and password created in [setup](#Setup)
+- Open http://127.0.0.1:8000/admin/clockify_app/parsinghistory/add/
+- Press "SAVE"
 - Open http://127.0.0.1:8000/admin/clockify_app/task/
 - Try different sort in right side for all your analytical performance evaluation tasks
 ### How to run Docker
