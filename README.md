@@ -10,7 +10,7 @@ Content
   - [Required to install](#Required-to-install)
   - [Environment](#Environment)
   - [Setup](#Setup)
-  - [How to run local](#How-to-run-local)
+  - [How to run locally](#How-to-run-locally)
 - [FAQ](#faq)
 - [Teams](#Teams)
 - [Support](#support)
@@ -59,7 +59,7 @@ Then enter username, email and password in terminal
 
 ----
 
-### How to run local
+### How to run locally
 
 - Start the terminal.
 - Go to the directory "your way to the project" / test_task_quintagroup
@@ -94,6 +94,8 @@ docker-compose up
 
 ### Development team (Ira Shevchenko)
 [![@shevchenkoira](https://github.com/shevchenkoira.png?size=200)](https://github.com/shevchenkoira)
+
+----
 
 ## Support
 
