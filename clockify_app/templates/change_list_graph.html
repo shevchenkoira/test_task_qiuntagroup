@@ -1,0 +1,111 @@
+{% extends "admin/change_list.html" %}
+{% load static %}
+{% block extrahead %}
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.min.js"></script>
+    <script>
+        var randomColorGenerator = function () {
+            return '#' + (Math.random().toString(16) + '0000000').slice(2, 8);
+        };
+        var options = {
+            responsive: true,
+            maintainAspectRatio: true,
+            legend: {
+                position: 'left'
+            },
+            title: {
+                display: true
+            },
+            animation: {
+                animateScale: true,
+                animateRotate: true
+            }
+        };
+        window.onload = function () {
+            var ctx = document.getElementById("status-chart");
+            {% regroup cl.queryset|dictsort:"status" by status as status_list %}
+            lineChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: [{% for status in status_list %}'{{ status.grouper }}',{% endfor %}],
+                    datasets: [{
+                        data: [{% for status in status_list %}'{{ status.list|length }}',{% endfor %}],
+                        backgroundColor: [{% for status in status_list %}randomColorGenerator(),{% endfor %}]
+                    }]
+                },
+                options: options
+            });
+            ctx = document.getElementById("duration-chart");
+            {% regroup cl.queryset|dictsort:"duration" by duration as duration_list %}
+            lineChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: [{% for duration in duration_list %}'{{ duration.grouper }}',{% endfor %}],
+                    datasets: [{
+                        data: [{% for duration in duration_list %}'{{ duration.list|length }}',{% endfor %}],
+                        backgroundColor: [{% for duration in duration_list %}randomColorGenerator(),{% endfor %}]
+                    }]
+                }, options: options
+            });
+            ctx = document.getElementById("start_date-chart");
+            {% regroup cl.queryset|dictsort:"start_date" by start_date as start_date_list %}
+            lineChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: [{% for start_date in start_date_list %}'{{ start_date.grouper }}',{% endfor %}],
+                    datasets: [{
+                        data: [{% for start_date in start_date_list %}'{{ start_date.list|length }}',{% endfor %}],
+                        backgroundColor: [{% for start_date in start_date_list %}randomColorGenerator(),{% endfor %}]
+                    }]
+                }, options: options
+            });
+            ctx = document.getElementById("end_date-chart");
+            {% regroup cl.queryset|dictsort:"end_date" by end_date as end_date_list %}
+            lineChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: [{% for end_date in end_date_list %}'{{ end_date.grouper }}',{% endfor %}],
+                    datasets: [{
+                        data: [{% for end_date in end_date_list %}'{{ end_date.list|length }}',{% endfor %}],
+                        backgroundColor: [{% for end_date in end_date_list %}randomColorGenerator(),{% endfor %}]
+                    }]
+                }, options: options
+            });
+            ctx = document.getElementById("project_name-chart");
+            {% regroup cl.queryset|dictsort:"project_name" by project_name as project_name_list %}
+            lineChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: [{% for project_name in project_name_list %}'{{ project_name.grouper }}',{% endfor %}],
+                    datasets: [{
+                        data: [{% for project_name in project_name_list %}'{{ project_name.list|length }}',{% endfor %}],
+                        backgroundColor: [{% for project_name in project_name_list %}randomColorGenerator(),{% endfor %}]
+                    }]
+                }, options: options
+            });
+        }
+    </script>
+{% endblock %}
+{% block content %}
+    <h1> Graphs </h1>
+    <hr>
+    <div class="row">
+        <div class="col-sm-5" style="margin-left: 10%">
+            <canvas id="status-chart" style="width: 100px !important;"></canvas>
+        </div>
+        <div class="col-sm-5">
+            <canvas id="duration-chart" style="width: 100px !important;"></canvas>
+        </div>
+        <div class="col-sm-4">
+            <canvas id="start_date-chart" style="width: 100px !important;"></canvas>
+        </div>
+        <div class="col-sm-4">
+            <canvas id="end_date-chart" style="width: 100px !important;"></canvas>
+        </div>
+        <div class="col-sm-4">
+            <canvas id="project_name-chart" style="width: 100px !important;"></canvas>
+        </div>
+    </div>
+    {{ block.super }}
+{% endblock %}
